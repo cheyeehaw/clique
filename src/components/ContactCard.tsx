@@ -36,7 +36,7 @@ export const ContactCard = () => {
       <div className="space-y-6">
         {/* Profile Section */}
         <div className="text-reveal text-reveal-delay-1 flex items-center space-x-4">
-          <Avatar className="h-8 w-16 border-2 border-primary/20">
+          <Avatar className="h-16 w-16 border-2 border-primary/20">
             <AvatarImage src={contact.avatar} alt={contact.name} />
             <AvatarFallback className="bg-primary/10 text-primary font-semibold text-lg">
               {contact.initials}
