@@ -80,14 +80,14 @@ export const InteractionsCard = ({ selectedInteraction, onSelectInteraction }: I
   ]);
 
   return (
-    <div className="crm-card bounce-hover h-fit">
+    <div className="crm-card bounce-hover h-full flex flex-col">
       <div className="text-reveal">
         <h2 className="text-xl font-semibold text-foreground mb-6 gradient-text">
           Recent Interactions
         </h2>
       </div>
       
-      <div className="space-y-3 max-h-96 overflow-y-auto">
+      <div className="space-y-3 max-h-96 overflow-y-auto flex-1">
         {interactions.map((interaction, index) => {
           const IconComponent = interactionIconsLucide[interaction.type];
           const isSelected = selectedInteraction === interaction.id;

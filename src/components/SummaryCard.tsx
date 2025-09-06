@@ -12,7 +12,7 @@ export const SummaryCard = ({ selectedInteraction }: SummaryCardProps) => {
     : null;
 
   return (
-    <div className="crm-card bounce-hover h-fit">
+    <div className="crm-card bounce-hover h-full flex flex-col">
       <div className="text-reveal">
         <h2 className="text-xl font-semibold text-foreground mb-6 gradient-text">
           Interaction Summary
