@@ -8,35 +8,63 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Modern CRM Color Palette */
+    --background: 212 15% 97%;
+    --foreground: 215 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 15%;
+    --card-hover: 210 20% 98%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Professional Blue */
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 210 100% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Light Blue */
+    --secondary: 210 50% 95%;
+    --secondary-foreground: 210 100% 40%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Subtle Grays */
+    --muted: 215 15% 95%;
+    --muted-foreground: 215 15% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Bright Blue */
+    --accent: 200 100% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Success & Warning */
+    --success: 120 60% 50%;
+    --success-foreground: 0 0% 100%;
+    --warning: 35 100% 55%;
+    --warning-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Borders & Inputs */
+    --border: 215 20% 88%;
+    --input: 215 20% 88%;
+    --ring: 210 100% 50%;
 
-    --radius: 0.5rem;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 50%), hsl(200 100% 60%));
+    --gradient-background: linear-gradient(145deg, hsl(212 15% 97%), hsl(210 20% 94%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 20% 98%));
+
+    /* Shadows */
+    --shadow-card: 0 4px 20px -2px hsl(210 15% 20% / 0.08);
+    --shadow-card-hover: 0 8px 30px -4px hsl(210 15% 20% / 0.12);
+    --shadow-glow: 0 0 40px hsl(210 100% 60% / 0.15);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 1rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +129,84 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: var(--gradient-background);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* CRM Card Animations */
+  .crm-card {
+    @apply bg-card border border-border rounded-2xl p-6 shadow-[var(--shadow-card)] 
+           transition-[var(--transition-smooth)] backdrop-blur-sm;
+    background: var(--gradient-card);
+  }
+  
+  .crm-card:hover {
+    @apply shadow-[var(--shadow-card-hover)];
+    transform: translateY(-2px) scale(1.01);
+    background: hsl(var(--card-hover));
+  }
+
+  /* Text Reveal Animations */
+  .text-reveal {
+    @apply opacity-0 translate-y-4;
+    animation: reveal 0.6s ease-out forwards;
+  }
+
+  .text-reveal-delay-1 {
+    animation-delay: 0.1s;
+  }
+  
+  .text-reveal-delay-2 {
+    animation-delay: 0.2s;
+  }
+  
+  .text-reveal-delay-3 {
+    animation-delay: 0.3s;
+  }
+
+  /* Interaction Item Styles */
+  .interaction-item {
+    @apply p-3 rounded-lg border border-transparent cursor-pointer
+           transition-[var(--transition-smooth)] hover:bg-muted/50;
+  }
+  
+  .interaction-item.selected {
+    @apply bg-primary/10 border-primary/30 shadow-sm;
+  }
+
+  /* Bounce Animation for Cards */
+  .bounce-hover:hover {
+    animation: bounce-gentle 0.3s ease-in-out;
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.02);
   }
 }
