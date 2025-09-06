@@ -20,28 +20,28 @@ const Index = () => {
           </p>
         </div>
 
-        {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6">
-          {/* Contact Info - Takes 1 column */}
-          <div className="xl:col-span-1">
+        {/* Dashboard Grid - 2x2 layout like iCloud */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-200px)]">
+          {/* Contact Info - Top Left */}
+          <div className="h-full">
             <ContactCard />
           </div>
 
-          {/* Upcoming Events - Takes 1 column */}
-          <div className="xl:col-span-1">
+          {/* Upcoming Events - Top Right */}
+          <div className="h-full">
             <UpcomingCard />
           </div>
 
-          {/* Interactions - Takes 1 column */}
-          <div className="xl:col-span-1">
+          {/* Interactions - Bottom Left */}
+          <div className="h-full">
             <InteractionsCard 
               selectedInteraction={selectedInteraction}
               onSelectInteraction={setSelectedInteraction}
             />
           </div>
 
-          {/* Summary - Takes 1 column */}
-          <div className="xl:col-span-1">
+          {/* Summary - Bottom Right */}
+          <div className="h-full">
             <SummaryCard selectedInteraction={selectedInteraction} />
           </div>
         </div>
