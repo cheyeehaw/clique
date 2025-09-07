@@ -1,4 +1,6 @@
-import { Calendar, ArrowRightCircle } from "lucide-react";
+import { Calendar, ArrowRightCircle, Link, CheckCircle2 } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "../hooks/use-toast";
 import { interactionsData, fakeData } from "./InteractionsCard";
 
 interface SummaryCardProps {
@@ -7,6 +9,8 @@ interface SummaryCardProps {
 
 export default function SummaryCard({ selectedInteraction }: SummaryCardProps) {
   const interaction = [...fakeData, ...interactionsData].find((i) => i.id === selectedInteraction);
+  const [addedToCalendar, setAddedToCalendar] = useState(false);
+  const { toast } = useToast();
 
   if (!interaction) {
     return (
@@ -55,8 +59,24 @@ export default function SummaryCard({ selectedInteraction }: SummaryCardProps) {
             </div>
 
             {/* Green Arrow Button on the right */}
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 text-white">
-              <ArrowRightCircle className="w-4 h-4" />
+            <button
+              className="w-8 h-8 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 text-white"
+              onClick={() => {
+                if (!addedToCalendar) {
+                  setAddedToCalendar(true);
+                  toast({
+                    title: "Added to your calendar",
+                    description: `${interaction.nextSteps?.action} on ${interaction.nextSteps?.date} at ${interaction.nextSteps?.time}`,
+                    variant: "default",
+                    className: "bg-green-500 text-white"
+                  });
+                } else {
+                  window.open("https://calendar.google.com/calendar/u/0/r/week/2025/9/14?pli=1", "_blank");
+                }
+              }}
+              aria-label={addedToCalendar ? "Open calendar" : "Add to calendar"}
+            >
+              {addedToCalendar ? <Link className="w-4 h-4" /> : <ArrowRightCircle className="w-4 h-4" />}
             </button>
           </div>
         </div>
