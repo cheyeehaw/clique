@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Phone, MessageSquare, Video, Mail, Calendar } from "lucide-react";
 
 interface Interaction {
@@ -33,7 +33,15 @@ export default function InteractionsCard({
   selectedInteraction,
   onSelectInteraction,
 }: InteractionsCardProps) {
-  const [interactions] = useState<Interaction[]>(interactionsData);
+  const [interactions, setInteractions] = useState<Interaction[]>(interactionsData);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setInteractions([...fakeData, ...interactions]);
+      console.log(interactions);
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <div className="crm-card flex flex-col h-full overflow-hidden">
@@ -79,13 +87,32 @@ export default function InteractionsCard({
   );
 }
 
+export const fakeData = [
+  {
+    id: "120",
+    type: "call",
+    title: "Contract Discussion with Zane",
+    date: "Sep 7, 2025",
+    time: "10:30 AM",
+    duration: "5 min",
+    summary:
+      "Discuss we're good to go with the contract. Will meet up next week to finalize contract.",
+    nextSteps: {
+      action: "Schedule Meeting",
+      date: "Sep 14, 2025",
+      time: "10:30 AM",
+    },
+  }
+];
+
+
 // ✅ Export the data so SummaryCard can reuse it
 export const interactionsData: Interaction[] = [
   {
     id: "1",
     type: "call",
     title: "Product Demo Discussion",
-    date: "Sep 6, 2025",
+    date: "Sep 7, 2025",
     time: "3:45 PM",
     duration: "25 min",
     summary:

@@ -1,12 +1,12 @@
 import { Calendar, ArrowRightCircle } from "lucide-react";
-import { interactionsData } from "./InteractionsCard";
+import { interactionsData, fakeData } from "./InteractionsCard";
 
 interface SummaryCardProps {
   selectedInteraction: string | null;
 }
 
 export default function SummaryCard({ selectedInteraction }: SummaryCardProps) {
-  const interaction = interactionsData.find((i) => i.id === selectedInteraction);
+  const interaction = [...fakeData, ...interactionsData].find((i) => i.id === selectedInteraction);
 
   if (!interaction) {
     return (
