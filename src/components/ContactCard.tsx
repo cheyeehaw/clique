@@ -15,14 +15,14 @@ interface ContactData {
 
 export default function ContactCard() {
   const [contact, setContact] = useState<ContactData>({
-    name: "Sarah Chen",
+    name: "Zane Smith",
     job: "Senior Product Manager",
     company: "TechFlow Solutions",
     phone: "+1 (555) 234-5678",
-    email: "sarah.chen@techflow.com",
-    notes: "Likes the Golden Warriors, do not call on Tuesdays, hates cats, only have Steve call her.",
+    email: "zane.smith@techflow.com",
+    notes: "Likes the Golden Warriors, do not call on Tuesdays, hates cats, only have Chey call him.",
     avatar: "",
-    initials: "SC",
+    initials: "ZS",
   });
 
   const [editingField, setEditingField] = useState<string | null>(null);
